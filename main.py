@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 async def echo(update, context):
     await update.message.reply_text('Чтобы начать, нажми /start')
 
+
 async def start(update, context):
     user = update.effective_user
     await update.message.reply_html(
@@ -24,12 +25,6 @@ async def help_command(update, context):
     await update.message.reply_text("Я пока не умею помогать...")
 
 
-
-
-# Зарегистрируем их в приложении перед
-# регистрацией обработчика текстовых сообщений.
-# Первым параметром конструктора CommandHandler я
-# вляется название команды.
 def main():
     application = Application.builder().token('5822667731:AAF2BwfBkHzk9Di3SoydIF4GMBhKamn8wfA').build()
 
@@ -41,7 +36,6 @@ def main():
     application.add_handler(text_handler)
 
     application.run_polling()
-
 
 
 if __name__ == '__main__':
