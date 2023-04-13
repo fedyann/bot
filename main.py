@@ -11,14 +11,13 @@ logger = logging.getLogger(__name__)
 
 async def echo(update, context):
     chat_id = update.message.chat_id
-    photo_file = open('images/meme.jpg', 'rb')
-    try:
+    with open('images/meme.jpg', 'rb') as photo_file:
         await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
-        logging.info('Photo sent successfully.')
-    except telegram.TelegramError as e:
-        logging.error(f'Error sending photo: {e}')
-    finally:
-        photo_file.close()
+    with open('images/mem_1.jpg', 'rb') as photo_file:
+        await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
+    with open('images/mem_2.jpg', 'rb') as photo_file:
+        await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
+
 
 
 async def start(update, context):
