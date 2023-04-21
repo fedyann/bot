@@ -9,22 +9,29 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-async def echo(update, context):
+async def send_text(update, context):
     chat_id = update.message.chat_id
-    with open('images/meme.jpg', 'rb') as photo_file:
-        await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
-    with open('images/mem_1.jpg', 'rb') as photo_file:
-        await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
-    with open('images/mem_2.jpg', 'rb') as photo_file:
-        await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
+
+
 
 
 
 async def start(update, context):
     user = update.effective_user
+    chat_id = update.message.chat_id
+
     await update.message.reply_html(
         rf"Привет, {user.mention_html()}! Я помогу тебе сделать твой собственный мем. Сначала выбери шаблон!",
     )
+    with open('images/mem_1.jpg', 'rb') as photo_file:
+        await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
+        await update.message.reply_text("1")
+    with open('images/mem_2.jpg', 'rb') as photo_file:
+        await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
+        await update.message.reply_text("2")
+    with open('images/meme.jpg', 'rb') as photo_file:
+        await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
+        await update.message.reply_text("3")
 
 
 async def help_command(update, context):
@@ -35,7 +42,7 @@ async def help_command(update, context):
 def main():
     application = Application.builder().token('5822667731:AAF2BwfBkHzk9Di3SoydIF4GMBhKamn8wfA').build()
 
-    text_handler = MessageHandler(filters.TEXT & ~filters.COMMAND, echo)
+    text_handler = MessageHandler(filters.TEXT & ~filters.COMMAND, send_text)
 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
