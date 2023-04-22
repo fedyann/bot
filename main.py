@@ -29,8 +29,11 @@ async def start(update, context):
     chat_id = update.message.chat_id
 
     await update.message.reply_html(
-        rf"Привет, {user.mention_html()}! Я помогу тебе сделать твой собственный мем. Сначала выбери шаблон!",
-    )
+        rf"Привет, {user.mention_html()}! Я помогу тебе сделать твой собственный мем. Сначала выбери шаблон и "
+                                    "придумай текст. Ответ пришли одним сообщением в формате:\n"
+                                    "номер шаблона\n"
+                                    "текст1\n"
+                                    "текст2")
     photo_files = [open('images/mem1.jpg', 'rb'), open('images/mem2.jpg', 'rb')]
 
     media = [telegram.InputMediaPhoto(photo_file) for photo_file in photo_files]
@@ -40,8 +43,12 @@ async def start(update, context):
 
 
 async def help_command(update, context):
-    """Отправляет сообщение когда получена команда /help"""
-    await update.message.reply_text("Я пока не умею помогать...")
+    await update.message.reply_text("Я помогу тебе сделать твой собственный мем!\n"
+                                    "Нажми /start, чтобы начать. Затем выбери шаблон для будущего мема и "
+                                    "придумай текст. Ответ пришли одним сообщением в формате:\n"
+                                    "номер шаблона\n"
+                                    "текст1\n"
+                                    "текст2")
 
 
 def main():

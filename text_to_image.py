@@ -17,7 +17,7 @@ class CreateMem():
         img = self.cur.execute(f"SELECT name from coordinates where id = {self.number}").fetchall()[0][0]
         image = Image.open(f"images/{img}")
         draw = ImageDraw.Draw(image)
-        font = ImageFont.truetype("fonts/font.ttf", 24)
+        font = ImageFont.truetype("fonts/font.ttf", 24, encoding="Windows-1251")
         x1 = self.cur.execute(f"SELECT x1 from coordinates where id = {self.number}").fetchall()[0][0]
         y1 = self.cur.execute(f"SELECT y1 from coordinates where id = {self.number}").fetchall()[0][0]
         x2 = self.cur.execute(f"SELECT x2 from coordinates where id = {self.number}").fetchall()[0][0]
