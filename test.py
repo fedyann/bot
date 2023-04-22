@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 async def echo(update, context):
     chat_id = update.message.chat_id
-    with open('images/meme.jpg', 'rb') as photo_file:
+    with open('images/mem1.jpg', 'rb') as photo_file:
         await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
     with open('images/mem_1.jpg', 'rb') as photo_file:
         await context.bot.send_photo(chat_id=chat_id, photo=photo_file)

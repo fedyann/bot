@@ -1,6 +1,8 @@
 import logging
 from telegram.ext import Application, MessageHandler, filters
 from telegram.ext import CommandHandler
+import telegram
+from text_to_image import CreateMem
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG
@@ -11,6 +13,12 @@ logger = logging.getLogger(__name__)
 
 async def send_text(update, context):
     chat_id = update.message.chat_id
+    text = update.message.text.split('\n')
+    number, text1, text2 = text[0], text[1], text[2]
+    if number.isdigit():
+        photo_file = CreateMem(int(number), text1, text2).text()
+        with open(photo_file, 'rb'):
+            await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
 
 
 
@@ -23,15 +31,12 @@ async def start(update, context):
     await update.message.reply_html(
         rf"Привет, {user.mention_html()}! Я помогу тебе сделать твой собственный мем. Сначала выбери шаблон!",
     )
-    with open('images/mem_1.jpg', 'rb') as photo_file:
-        await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
-        await update.message.reply_text("1")
-    with open('images/mem_2.jpg', 'rb') as photo_file:
-        await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
-        await update.message.reply_text("2")
-    with open('images/meme.jpg', 'rb') as photo_file:
-        await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
-        await update.message.reply_text("3")
+    photo_files = [open('images/mem1.jpg', 'rb'), open('images/mem2.jpg', 'rb')]
+
+    media = [telegram.InputMediaPhoto(photo_file) for photo_file in photo_files]
+
+    await context.bot.send_media_group(chat_id=chat_id, media=media)
+
 
 
 async def help_command(update, context):
