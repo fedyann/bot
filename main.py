@@ -14,11 +14,19 @@ logger = logging.getLogger(__name__)
 async def send_text(update, context):
     chat_id = update.message.chat_id
     text = update.message.text.split('\n')
-    number, text1, text2 = text[0], text[1], text[2]
-    if number.isdigit():
+    number = text[0]
+    if number.isdigit() and len(text) >= 3:
+        text1, text2 = text[1], text[2]
         photo_file = CreateMem(int(number), text1, text2).text()
         with open(photo_file, 'rb'):
             await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
+    else:
+        await update.message.reply_text("Выбери шаблон для будущего мема и "
+                                        "придумай текст. Ответ пришли одним сообщением в формате:\n"
+                                        "номер шаблона\n"
+                                        "текст1\n"
+                                        "текст2")
+
 
 
 
