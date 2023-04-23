@@ -1,2 +1,2 @@
-telegram.ext
-logging
+python-telegram-bot==20.2
+Pillow==9.5.0
