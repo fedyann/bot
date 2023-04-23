@@ -17,9 +17,12 @@ async def send_text(update, context):
     number = text[0]
     if number.isdigit() and len(text) >= 3:
         text1, text2 = text[1], text[2]
-        photo_file = CreateMem(int(number), text1, text2).text()
-        with open(photo_file, 'rb'):
-            await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
+        if len(text1) < 60 and len(text2) < 60:
+            photo_file = CreateMem(int(number), text1, text2).text()
+            with open(photo_file, 'rb'):
+                await context.bot.send_photo(chat_id=chat_id, photo=photo_file)
+        else:
+            await update.message.reply_text("Слишком длинный текст, введите покороче")
     else:
         await update.message.reply_text("Выбери шаблон для будущего мема и "
                                         "придумай текст. Ответ пришли одним сообщением в формате:\n"
@@ -42,7 +45,8 @@ async def start(update, context):
                                     "номер шаблона\n"
                                     "текст1\n"
                                     "текст2")
-    photo_files = [open('images/mem1_text.jpg', 'rb'), open('images/mem2_text.jpg', 'rb')]
+    photo_files = [open('images/mem1_text.jpg', 'rb'), open('images/mem2_text.jpg', 'rb'), open('images/mem3_text.jpg', 'rb'),
+                   open('images/mem4_text.jpg', 'rb'), open('images/mem5_text.jpg', 'rb')]
 
     media = [telegram.InputMediaPhoto(photo_file) for photo_file in photo_files]
 
