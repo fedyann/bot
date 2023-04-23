@@ -42,7 +42,7 @@ async def start(update, context):
                                     "номер шаблона\n"
                                     "текст1\n"
                                     "текст2")
-    photo_files = [open('images/mem1.jpg', 'rb'), open('images/mem2.jpg', 'rb')]
+    photo_files = [open('images/mem1_text.jpg', 'rb'), open('images/mem2_text.jpg', 'rb')]
 
     media = [telegram.InputMediaPhoto(photo_file) for photo_file in photo_files]
 
