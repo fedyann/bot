@@ -43,3 +43,11 @@ draw.text((230, 70), "Текст 2", font=font, fill="black")
 draw.text((200, 170), "5", font=font2, fill="white")
 name = "images/mem5_text.jpg"
 image.save(name)
+
+image = Image.open(f"images/mem6.jpg")
+draw = ImageDraw.Draw(image)
+draw.text((10, 200), "Текст 1", font=font, fill="black")
+draw.text((200, 200), "Текст 2", font=font, fill="black")
+draw.text((120, 100), "6", font=font2, fill="black")
+name = "images/mem6_text.jpg"
+image.save(name)
